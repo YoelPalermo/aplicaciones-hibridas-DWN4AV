@@ -3,7 +3,7 @@
 const http = require('http');
 
 const PORT = 3000;
-
+const os = require('os');
 const server = http.createServer((req, res) => {
 
     const url = req.url;
@@ -20,7 +20,13 @@ const server = http.createServer((req, res) => {
         res.writeHead(200, {'Content-Type': 'application/json'});
         res.end(JSON.stringify(data));
     
-    }else if (url === "/static" && method === 'GET'){
+    }else if (url === "/info" && method === 'GET'){
+        
+        res.writeHead(200, {'Content-Type': 'text/plain'});
+        res.end(os.type());
+    
+    }
+    else if (url === "/static" && method === 'GET'){
         const data=`<!DOCTYPE html>
 <html lang="es">
 <head>
